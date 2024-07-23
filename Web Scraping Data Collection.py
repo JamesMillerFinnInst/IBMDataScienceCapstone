@@ -6,7 +6,7 @@ import pandas as pd
 import os
 
 # Define directory
-directory = r'\\finnhudson\shared\James Upstate Reform\Professional\Certs\Coursera\IBM Data Science\Local Project\Courses\Capstone'
+directory = r'\\someserver\shared\Courses\Capstone'
 ################################################## Define Functions ####################################################
 def date_time(table_cells):
     """
