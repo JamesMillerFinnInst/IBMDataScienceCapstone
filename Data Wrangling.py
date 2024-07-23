@@ -2,7 +2,7 @@ import pandas as pd
 import os
 
 # define directory
-directory = r'\\finnhudson\shared\James Upstate Reform\Professional\Certs\Coursera\IBM Data Science\Local Project\Courses\Capstone'
+directory = r'\\someserver\shared\Courses\Capstone'
 
 # Read in data
 df = pd.read_csv(os.path.join(directory, 'Launch Data API.csv'), index_col=False)
