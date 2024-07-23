@@ -5,7 +5,7 @@ import datetime
 import os
 
 # Define Directory
-directory = r'\\finnhudson\shared\James Upstate Reform\Professional\Certs\Coursera\IBM Data Science\Local Project\Courses\Capstone'
+directory = r'\\someserver\shared\Courses\Capstone'
 ################################################## Define Functions ####################################################
 ########## Define functions to Call the SpaceX API #########
 # Uses the rocket column of df to append rocket data to a list
