@@ -6,7 +6,7 @@ import folium
 import os
 
 # define directory
-directory = r'\\someserver\shared\Courses\Capstone'
+directory = r'\\finnhudson\shared\James Upstate Reform\Professional\Certs\Coursera\IBM Data Science\Local Project\Courses\Capstone'
 
 # Read in data
 url = r'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DS0321EN-SkillsNetwork/datasets/spacex_launch_geo.csv'
@@ -126,29 +126,38 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     distance = R * c
     return distance
 
-coastline_lat = 28.56367
-coastline_lon = -80.57163
-launch_site_lat = 28.5623 
-launch_site_lon = -80.5774
 
-# Calculate the distance
-distance_coastline = calculate_distance(launch_site_lat, launch_site_lon, coastline_lat, coastline_lon)
-print(f"Distance to coastline: {distance_coastline:.2f} km")
+# Define a function to calculate distance and add markers and lines to the map
+def add_distance_marker_and_line(map_object, launch_site_coords, point_coords, label):
+    distance = calculate_distance(launch_site_coords[0], launch_site_coords[1], point_coords[0], point_coords[1])
 
-# Add a marker for the coastline
-distance_marker = folium.Marker(
-    [coastline_lat, coastline_lon],
-    icon=DivIcon(
-        icon_size=(20,20),
-        icon_anchor=(0,0),
-        html='<div style="font-size: 12; color:#d35400;"><b>%s</b></div>' % "{:10.2f} KM".format(distance_coastline),
+    # Add a marker
+    distance_marker = folium.Marker(
+        [point_coords[0], point_coords[1]],
+        icon=DivIcon(
+            icon_size=(20, 20),
+            icon_anchor=(0, 0),
+            html='<div style="font-size: 12; color:#d35400;"><b>%s</b></div>' % "{:10.2f} KM".format(distance),
+        )
     )
-)
-site_map.add_child(distance_marker)
+    map_object.add_child(distance_marker)
 
-# Draw a line between the launch site and the coastline
-lines = folium.PolyLine(locations=[[launch_site_lat, launch_site_lon], [coastline_lat, coastline_lon]], weight=1)
-site_map.add_child(lines)
+    # Draw a line between the launch site and the point of interest
+    line = folium.PolyLine(locations=[launch_site_coords, point_coords], weight=1)
+    map_object.add_child(line)
+
+    print(f"Distance to {label}: {distance:.2f} km")
+
+points_of_interest = [
+    {'label': 'coastline', 'point_coords': (28.5646, -80.56816), 'launch_site_coords': (28.5623, -80.5774)},
+    {'label': 'city', 'point_coords': (34.6917, -120.45908), 'launch_site_coords': (34.63307, -120.61066)},
+    {'label': 'highway', 'point_coords': (28.41522, -80.63218), 'launch_site_coords': (28.5623, -80.5774)},
+    {'label': 'rail', 'point_coords': (28.54823, -81.38084), 'launch_site_coords': (28.5623, -80.5774)}
+]
+
+# Process each point of interest
+for poi in points_of_interest:
+    add_distance_marker_and_line(site_map, poi['launch_site_coords'], poi['point_coords'], poi['label'])
 
 site_map.save(os.path.join(directory, 'Maps', 'Launch Sites with Ditances Map.html'))
 site_map
