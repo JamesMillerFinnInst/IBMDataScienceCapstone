@@ -126,10 +126,9 @@ def calculate_distance(lat1, lon1, lat2, lon2):
     distance = R * c
     return distance
 
-# Example coordinates for closest coastline
 coastline_lat = 28.56367
 coastline_lon = -80.57163
-launch_site_lat = 28.5623  # Example coordinates for one of the launch sites
+launch_site_lat = 28.5623 
 launch_site_lon = -80.5774
 
 # Calculate the distance
