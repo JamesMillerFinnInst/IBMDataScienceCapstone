@@ -6,7 +6,7 @@ import folium
 import os
 
 # define directory
-directory = r'\\finnhudson\shared\James Upstate Reform\Professional\Certs\Coursera\IBM Data Science\Local Project\Courses\Capstone'
+directory = r'\\someserver\shared\Courses\Capstone'
 
 # Read in data
 url = r'https://cf-courses-data.s3.us.cloud-object-storage.appdomain.cloud/IBM-DS0321EN-SkillsNetwork/datasets/spacex_launch_geo.csv'
